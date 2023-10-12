@@ -1,11 +1,15 @@
-import { models , model , Schema} from "mongoose";
+import { models, model, Schema } from "mongoose";
 
 const shortnerSchema = new Schema({
-    link:String,
-    Shortlink:String,
-},{
+    link: String,
+    Shortlink: String,
+    count: {
+        type: Number,
+        default: 0
+    }
+}, {
     versionKey: false
 });
 
-const shortner = models.shortner || model("shortner" , shortnerSchema);
+const shortner = models.shortner || model("shortner", shortnerSchema);
 export default shortner;
