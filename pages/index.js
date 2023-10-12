@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const Home = () => {
@@ -7,7 +8,7 @@ const Home = () => {
     const short = async () => {
         if (link) {
             const req = await axios.post('/api/createLink', { link });
-            const shortedlink = "http://π.site/s/"+req.data.Shortlink;
+            const shortedlink = window.location.href+req.data.Shortlink;
             setshored(shortedlink);
         }
     }
