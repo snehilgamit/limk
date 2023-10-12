@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import ConnectDB from '@/helper/mongoDB';
 import shortner from '@/models/shortner';
 const query = ({ link }) => {
+    const [text,settext]=useState('Redirecting...');
     const router =  useRouter();
     useEffect(()=>{
         if(link){
         router.push(`${link}`);
     }
+    else{
+        settext('Invalid link')
+    }
     },[])
     return (
         <div className='m-3 text-xl'>
-            Redirecting...
+            {text}
         </div>
     )
 }
