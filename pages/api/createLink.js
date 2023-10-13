@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     const {link} = req.body;
     await ConnectDB();
 
-    if(link){
+    if(link === null){
 
 
     function generateString(length) {
