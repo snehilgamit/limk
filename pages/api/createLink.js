@@ -7,7 +7,6 @@ export default async function handler(req, res) {
     if (req.body && req.body.link) {
         const { link } = req.body;
         if (link.toString().trim().length === 0) {
-
             function generateString(length) {
                 let result = '';
                 const charactersLength = characters.length;
