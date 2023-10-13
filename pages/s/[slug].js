@@ -20,8 +20,10 @@ const query = ({ data }) => {
         }
     }, [])
     return (
+        <div className='w-full min-h-screen'>
         <div className='m-3 text-xl text-white'>
             Link opened for {data.count+1} times,  {text}
+        </div>
         </div>
     )
 }
