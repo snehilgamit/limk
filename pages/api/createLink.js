@@ -27,5 +27,7 @@ export default async function handler(req, res) {
     }
     const upload = await shortner.create({link,Shortlink});
     res.json({Shortlink});}
-    res.json({err:"provide link"})
+    else{
+        res.json({err:"provide link"})
+    }
 }
