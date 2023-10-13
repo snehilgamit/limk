@@ -6,6 +6,9 @@ export default async function handler(req, res) {
     const {link} = req.body;
     await ConnectDB();
 
+    if(link){
+
+
     function generateString(length) {
         let result = '';
         const charactersLength = characters.length;
@@ -23,5 +26,6 @@ export default async function handler(req, res) {
         findDublicate = await shortner.find({Shortlink});
     }
     const upload = await shortner.create({link,Shortlink});
-    res.json({Shortlink});
+    res.json({Shortlink});}
+    res.json({err:"provide link"})
 }
