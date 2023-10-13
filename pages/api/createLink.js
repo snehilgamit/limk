@@ -4,7 +4,6 @@ import shortner from "@/models/shortner";
 export default async function handler(req, res) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     await ConnectDB();
-    if (req.body && req.body.link) {
         const { link } = req.body;
         if (link.toString().trim().length === 0) {
             function generateString(length) {
@@ -29,8 +28,4 @@ export default async function handler(req, res) {
         else {
             res.json({ err: "provide link" })
         }
-    }
-    else {
-        res.json({ err: "provide link" })
-    }
 }
