@@ -8,7 +8,6 @@ const Home = () => {
     const short = async () => {
         if (link) {
             const req = await axios.post('/api/createLink', { link });
-            console.log(req.data);
             const shortedlink = "https://www.π.site/s/"+req.data.Shortlink;
             setshored(shortedlink);
         }
