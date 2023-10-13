@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     await ConnectDB();
         const { link } = req.body;
-        if (link.toString().trim().length === 0) {
+        if (link.toString().trim().length !== 0) {
             function generateString(length) {
                 let result = '';
                 const charactersLength = characters.length;
