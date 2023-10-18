@@ -31,7 +31,7 @@ const Home = () => {
                 <input className="rounded-3xl h-[2rem] w-64 px-2" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)}/>
                 <div className="text-black mt-4 text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>short it</div>
                 {shorted &&
-                <div className="text-white mt-3">Click to copy <span className="text-blue-400 hover:text-blue-800" onClick={copy}>{shorted}</span> </div>}
+                <div className="text-black  mt-3">Click to copy <span className="text-blue-400 hover:text-blue-800" onClick={copy}>{shorted}</span> </div>}
             </div>
             </div>
         </>
