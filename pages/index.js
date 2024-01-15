@@ -24,14 +24,12 @@ const Home = () => {
     }
     return (
         <>
-        <div className="w-full min-h-screen bg-white bg-opacity-10 flex justify-center items-center">
-
-            
-            <div className="text-black flex justify-center flex-col items-center">
-                <input className="rounded-3xl h-[2rem] w-64 px-2" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)}/>
-                <div className="text-black mt-4 text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>short it</div>
+        <div className="w-full min-h-screen flex justify-center items-center">
+            <div className="text-black w-full flex justify-center flex-col items-center">
+                <input className="rounded-3xl h-[3rem] min-w-[50%] max-w-[60%] text-center px-2 py-2 mb-4 placeholder:text-center" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)}/>
+                <div className="text-black cursor-pointer mt-4 text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>Short Again</div>
                 {shorted &&
-                <div className="text-black  mt-3">Click to copy <span className="text-blue-400 hover:text-blue-800" onClick={copy}>{shorted}</span> </div>}
+                <div className="text-white cursor-pointer mt-3">Click to copy <span className="text-blue-400 hover:text-blue-800" onClick={copy}>{shorted}</span> </div>}
             </div>
             </div>
         </>

@@ -10,18 +10,22 @@ const query = ({ data }) => {
         link.toLowerCase();
         if(link.startsWith('https')||link.startsWith('http')){
         if (link) {
-            router.push(`${link}`);
+            setTimeout(()=>{
+                router.push(`${link}`);
+            },600);
         }
         else{
             settext('Invalid link');
         }}
         else{
-            router.push(`http://${link}`);
+            setTimeout(()=>{
+                router.push(`http://${link}`);
+            },600);
         }
     }, [])
     return (
         <div className='w-full min-h-screen'>
-        <div className='m-3 text-xl text-black'>
+        <div className='m-3 text-xl text-stone-50'>
             Link opened for {data.count+1} times,  {text}
         </div>
         </div>
