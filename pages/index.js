@@ -18,7 +18,7 @@ const Home = () => {
     const short = async () => {
         if (link) {
             const req = await axios.post('/api/createLink', { link });
-            const shortedlink = "https://www.π.site/s/" + req.data.Shortlink;
+            const shortedlink = "https://www.π.site/" + req.data.Shortlink;
             setshored(shortedlink);
             const getHistory = localStorage.getItem('history');
             if(getHistory){
