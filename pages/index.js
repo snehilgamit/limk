@@ -57,7 +57,7 @@ const Home = () => {
                     <div className="text-black cursor-pointer mt-4 tracking-wider font-bold text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>Short it!</div>
                     {shorted &&
                         <div className="text-white cursor-pointer mt-3">Click to copy <span className="text-blue-400 active:text-orange-500" onClick={()=>{copy(shorted)}}>{shorted}</span> </div>}
-                    <div className="text-white mt-5 text-3xl border w-[600px] text-center py-2 max-sm:w-full">
+                    <div className="text-white mt-5 text-3xl w-[600px] text-center py-2 max-sm:w-full">
                         <h1 className="font-bold mb-5">History</h1>
                         {history.map((el, index) => (
                             <div key={index} className="flex justify-around text-start text-sm h-5 my-3 cursor-pointer">
