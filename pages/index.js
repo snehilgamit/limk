@@ -64,7 +64,7 @@ const Home = () => {
                                 <div className="px-4 font-medium text-orange-500 hover:opacity-60">{index + 1}</div>
                                 <div className="px-4 w-full active:text-orange-500 truncate hover:opacity-60 active:opacity-100" onClick={()=>{copy(el.link)}}>{el.link}</div>
                                 <div className="px-4  w-full truncate active:text-orange-500 hover:opacity-60 active:opacity-100" onClick={()=>{copy(el.enteredLink)}}>{el.enteredLink}</div>
-                                <div className="bg-white hover:opacity-60 px-4 text-center mx-4 text-black rounded-xl" onClick={()=>remove(index)}>remove</div>
+                                <div className="bg-white hover:opacity-60 px-4 text-center  mx-4 text-black rounded-xl" onClick={()=>remove(index)}>remove</div>
                             </div>
                         ))}
                     </div>
