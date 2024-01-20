@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
     const [link, setlink] = useState('');
-    const [shorted, setshored] = useState('');
+    const [shorted, setshorted] = useState('');
     const [history, setHistory] = useState([]);
+    const [text,setText] = useState('Short it!')
     const sethistoryFun = () => {
         const findHistory = localStorage.getItem('history');
         if (findHistory) {
@@ -16,10 +17,17 @@ const Home = () => {
         }
     }
     const short = async () => {
+        setshorted('')
+        setText('Shorting')
         if (link) {
             const req = await axios.post('/api/createLink', { link });
             const shortedlink = "https://www.π.site/" + req.data.Shortlink;
-            setshored(shortedlink);
+            setshorted(shortedlink);
+            setTimeout(()=>{
+                setText('Short it!')
+            },800)
+            setlink('');
+            setText("Done");
             const getHistory = localStorage.getItem('history');
             if(getHistory){
                 const historyObject =  JSON.parse(getHistory)
@@ -27,6 +35,13 @@ const Home = () => {
                 localStorage.setItem('history', JSON.stringify(historyObject));
                 sethistoryFun();
             }
+        }
+        else{
+            setTimeout(()=>{
+                setText("Short it")
+            },800)
+            setlink('');
+            setText("Error");
         }
     }
     const copy = (getLink) => {
@@ -51,10 +66,10 @@ const Home = () => {
     }, [])
     return (
         <>
-            <div className="w-full min-h-[75vh] flex justify-center items-center">
-                <div className="text-black w-full flex justify-center flex-col items-center">
-                    <input className="rounded-3xl h-[3rem] max-sm:w-[250px] w-[500px] text-center px-2 py-2 mb-4 placeholder:text-center" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)} />
-                    <div className="text-black cursor-pointer mt-4 tracking-wider font-bold text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>Short it!</div>
+            <div className="w-full  flex justify-center items-center">
+                <div className="text-black mt-[10rem] mb-20 w-full flex justify-center flex-col items-center">
+                    <input className="rounded-3xl h-[3rem] max-sm:w-[250px] w-[500px] text-center px-2 py-2 mb-4 placeholder:text-center" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)} value={link} />
+                    <div className="text-black cursor-pointer mt-4 tracking-wider font-bold text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>{text}</div>
                     {shorted &&
                         <div className="text-white cursor-pointer mt-3">Click to copy <span className="text-blue-400 active:text-orange-500" onClick={()=>{copy(shorted)}}>{shorted}</span> </div>}
                     <div className="text-white mt-5 text-3xl w-[600px] text-center py-2 max-sm:w-full">
