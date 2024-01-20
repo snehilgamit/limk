@@ -5,3 +5,10 @@
 body{
   background-color: rgba(0, 0, 0, 0.905);
 }
+.history{
+  animation: blurTxt 800ms linear;
+}
+@keyframes blurTxt {
+  from{filter: blur(20px);}
+  to{filter: blur(0px);}
+}
