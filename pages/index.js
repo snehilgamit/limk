@@ -66,7 +66,7 @@ const Home = () => {
     }, [])
     return (
         <>
-            <div className="w-full  flex justify-center items-center">
+            <div className="w-full selection:bg-red-600  flex justify-center items-center">
                 <div className="text-black mt-[10rem] mb-20 w-full flex justify-center flex-col items-center">
                     <input className="rounded-3xl h-[3rem] max-sm:w-[250px] w-[500px] text-center px-2 py-2 mb-4 placeholder:text-center" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)} onClick={()=>{setshorted('')}} value={link} />
                     <div className="text-black cursor-pointer mt-4 tracking-wider font-bold text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>{text}</div>
