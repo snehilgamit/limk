@@ -61,17 +61,14 @@ const Home = () => {
         localStorage.setItem('history', JSON.stringify(historyObject));
         let i = 0;
         let lastNode = document.querySelectorAll('.history')[num];
-        const removeHistory = () =>{
-            if (i <= 120) {
-                lastNode.style.filter = `blur(${i}px)`;
-                i+=3;
-                requestAnimationFrame(removeHistory);
-            } else {
-                lastNode.style.filter='blur(0px)';
+        const anniInterval = setInterval(()=>{
+            if(i==150){
+                clearInterval(anniInterval);
                 sethistoryFun();
             }
-        } 
-        removeHistory()
+            lastNode.style.filter=`blur(${i}px)`
+            i++;
+        },2)
     }
     useEffect(() => {
         sethistoryFun();
@@ -89,7 +86,7 @@ const Home = () => {
                     <div  className="text-white mt-5 text-3xl w-[600px] text-center py-2 max-sm:w-full">
                         <h1 className="font-bold mb-5">History</h1>
                         {history.map((el, index) => (
-                            <div key={index} style={{zIndex:index+1}} className="history flex justify-around text-start text-sm h-5 my-3 cursor-pointer">
+                            <div key={index} className="history flex justify-around text-start text-sm h-5 my-3 cursor-pointer">
                                 <div className="px-4 font-medium text-red-600 hover:opacity-60">{index + 1}</div>
                                 <div className="px-4 w-full active:text-red-600 truncate hover:opacity-60 active:opacity-100" onClick={() => { copy(el.link) }}>{el.link}</div>
                                 <div className="px-4  w-full truncate active:text-red-600 hover:opacity-60 active:opacity-100" onClick={() => { copy(el.enteredLink) }}>{el.enteredLink}</div>
