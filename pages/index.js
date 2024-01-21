@@ -64,10 +64,13 @@ const Home = () => {
         const anniInterval = setInterval(()=>{
             if(i==150){
                 clearInterval(anniInterval);
+                lastNode.style.filter='blur(0px)';
                 sethistoryFun();
             }
-            lastNode.style.filter=`blur(${i}px)`
-            i++;
+            else{
+                lastNode.style.filter=`blur(${i}px)`
+                i++;
+            }
         },2)
     }
     useEffect(() => {
@@ -101,3 +104,9 @@ const Home = () => {
 }
 
 export default Home;
+
+
+
+
+
+
