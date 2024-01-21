@@ -59,20 +59,20 @@ const Home = () => {
         const historyObject = JSON.parse(getHistory);
         historyObject.splice(num, 1);
         localStorage.setItem('history', JSON.stringify(historyObject));
-        // let i = 0;
-        // let lastNode = document.querySelectorAll('.history')[num];
-        // const anniInterval = setInterval(()=>{
-        //     if(i==150){
-        //         clearInterval(anniInterval);
-        //         lastNode.style.filter='blur(0px)';
-        //         sethistoryFun();
-        //     }
-        //     else{
-        //         lastNode.style.filter=`blur(${i}px)`
-        //         i++;
-        //     }
-        // },2)
-        sethistoryFun();
+        let i = 0;
+        let lastNode = document.querySelectorAll('.history')[num];
+        const anniInterval = setInterval(()=>{
+            if(i>=150){
+                clearInterval(anniInterval);
+                lastNode.style.filter='blur(0px)';
+                sethistoryFun();
+            }
+            else{
+                lastNode.style.filter=`blur(${i}px)`
+                i++;
+            }
+        },2)
+        // sethistoryFun();
     }
     useEffect(() => {
         sethistoryFun();
