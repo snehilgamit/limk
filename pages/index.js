@@ -6,7 +6,7 @@ const Home = () => {
     const [link, setlink] = useState('');
     const [shorted, setshorted] = useState('');
     const [history, setHistory] = useState([]);
-    const [text,setText] = useState('Short it!')
+    const [text, setText] = useState('Short it!')
     const sethistoryFun = () => {
         const findHistory = localStorage.getItem('history');
         if (findHistory) {
@@ -23,23 +23,23 @@ const Home = () => {
             const req = await axios.post('/api/createLink', { link });
             const shortedlink = "https://www.π.site/" + req.data.Shortlink;
             setshorted(shortedlink);
-            setTimeout(()=>{
+            setTimeout(() => {
                 setText('Short it!')
-            },800)
+            }, 800)
             setlink('');
             setText("Done");
             const getHistory = localStorage.getItem('history');
-            if(getHistory){
-                const historyObject =  JSON.parse(getHistory)
+            if (getHistory) {
+                const historyObject = JSON.parse(getHistory)
                 const setHistoryLS = historyObject.push({ link: shortedlink, enteredLink: link })
                 localStorage.setItem('history', JSON.stringify(historyObject));
                 sethistoryFun();
             }
         }
-        else{
-            setTimeout(()=>{
+        else {
+            setTimeout(() => {
                 setText("Short it")
-            },800)
+            }, 800)
             setlink('');
             setText("Error");
         }
@@ -56,8 +56,8 @@ const Home = () => {
     }
     const remove = (num) => {
         const getHistory = localStorage.getItem('history');
-        const historyObject =  JSON.parse(getHistory);
-        historyObject.splice(num,1);
+        const historyObject = JSON.parse(getHistory);
+        historyObject.splice(num, 1);
         localStorage.setItem('history', JSON.stringify(historyObject));
         sethistoryFun();
     }
@@ -66,20 +66,22 @@ const Home = () => {
     }, [])
     return (
         <>
-            <div className="w-full selection:bg-red-600 flex justify-center items-center">
+            <div className="w-full selection:bg-red-600 flex justify-center items-center overflow-hidden">
                 <div className="text-black mt-[10rem] mb-20 w-full flex justify-center flex-col items-center">
-                    <input className="rounded-3xl h-[3rem] max-sm:w-[250px] w-[500px] text-center px-2 py-2 mb-4 placeholder:text-center" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)} onClick={()=>{setshorted('')}} value={link} />
+                    <input className="rounded-3xl h-[3rem] max-sm:w-[250px] w-[500px] text-center px-2 py-2 mb-4 placeholder:text-center" type="url" name="url" placeholder="Enter link" onChange={(e) => setlink(e.target.value)} onClick={() => { setshorted('') }} value={link} />
                     <div className="text-black cursor-pointer mt-4 tracking-wider font-bold text-lg bg-white rounded-3xl px-6 hover:bg-opacity-50" onClick={short}>{text}</div>
-                    {shorted? <div className="text-white cursor-pointer mt-3 active:text-red-600" onClick={()=>{copy(shorted)}}><span className="text-red-600 text-xl font-extrabold">{'< '}</span>{shorted}<span className="text-red-600 font-extrabold text-xl">{' />'}</span> </div>:
-                        <div className="text-white cursor-pointer mt-3"><span className="text-red-600 text-xl font-extrabold">{'< '}</span>Click on any link it will be copied<span className="text-red-600 font-extrabold text-xl">{' />'}</span></div>}
-                    <div className="text-white mt-5 text-3xl w-[600px] text-center py-2 max-sm:w-full">
+                    {shorted ? <div className="text-white cursor-pointer mt-3 active:text-red-600 font-semibold" onClick={() => { copy(shorted) }}><span className="text-red-600 text-xl font-extrabold">{'< '}</span>
+                    <span className="shortedLink" >{shorted}</span>
+                    <span className="text-red-600 font-extrabold text-xl">{' />'}</span> </div> :
+                        <div className="text-white cursor-pointer mt-3 font-semibold"><span className="text-red-600 text-xl font-extrabold">{'< '}</span>Click on any link it will be copied<span className="text-red-600 font-extrabold text-xl">{' />'}</span></div>}
+                    <div  className="text-white mt-5 text-3xl w-[600px] text-center py-2 max-sm:w-full">
                         <h1 className="font-bold mb-5">History</h1>
                         {history.map((el, index) => (
-                            <div key={index} className="flex history justify-around text-start text-sm h-5 my-3 cursor-pointer">
+                            <div key={index} className="history flex justify-around text-start text-sm h-5 my-3 cursor-pointer">
                                 <div className="px-4 font-medium text-red-600 hover:opacity-60">{index + 1}</div>
-                                <div className="px-4 w-full active:text-red-600 truncate hover:opacity-60 active:opacity-100" onClick={()=>{copy(el.link)}}>{el.link}</div>
-                                <div className="px-4  w-full truncate active:text-red-600 hover:opacity-60 active:opacity-100" onClick={()=>{copy(el.enteredLink)}}>{el.enteredLink}</div>
-                                <div className="bg-white hover:opacity-60 px-4 text-center  mx-4 text-black rounded-xl" onClick={()=>remove(index)}>remove</div>
+                                <div className="px-4 w-full active:text-red-600 truncate hover:opacity-60 active:opacity-100" onClick={() => { copy(el.link) }}>{el.link}</div>
+                                <div className="px-4  w-full truncate active:text-red-600 hover:opacity-60 active:opacity-100" onClick={() => { copy(el.enteredLink) }}>{el.enteredLink}</div>
+                                <div className="bg-white hover:opacity-60 px-4 text-center  mx-4 text-black rounded-xl" onClick={() => remove(index)}>remove</div>
                             </div>
                         ))}
                     </div>

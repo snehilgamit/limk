@@ -6,9 +6,20 @@ body{
   background-color: rgba(0, 0, 0, 0.905);
 }
 .history{
-  animation: blurTxt 550ms linear;
+  animation: blurTxt 550ms linear,Intext 550ms linear;
+}
+.shortedLink{
+  animation: blurShortedTxt 550ms linear;
+}
+@keyframes Intext {
+  from{transform:translateX(40px) ;}
+  to{transform:translateX(0px);}
 }
 @keyframes blurTxt {
   from{filter: blur(20px);}
+  to{filter: blur(0px);}
+}
+@keyframes blurShortedTxt {
+  from{filter: blur(2px);}
   to{filter: blur(0px);}
 }
