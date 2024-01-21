@@ -6,7 +6,7 @@ body {
   background-color: rgba(0, 0, 0, 0.905);
 }
 .history {
-  transition: transform 1s ease-in-out;
+  /* transition: transform 1s ease-in-out; */
   animation: blurTxt 550ms linear;
 }
 /* Intext 550ms linear */
