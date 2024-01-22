@@ -5,28 +5,35 @@ import shortner from '@/models/shortner';
 const query = ({ data }) => {
     const [text, settext] = useState('Redirecting...');
     const router = useRouter();
-    if (data.status) {
-        const link = data.link;
-        link.toLowerCase();
-        if (link.startsWith('https') || link.startsWith('http')) {
-            if (link) {
-                setTimeout(() => {
-                    router.push(`${link}`);
-                }, 600);
+    const set = () =>{
+
+        if (data.status) {
+            const link = data.link;
+            link.toLowerCase();
+            if (link.startsWith('https') || link.startsWith('http')) {
+                if (link) {
+                    setTimeout(() => {
+                        router.push(`${link}`);
+                    }, 600);
+                }
+                else {
+                    settext('Invalid link');
+                }
             }
             else {
-                settext('Invalid link');
+                setTimeout(() => {
+                    router.push(`http://${link}`);
+                }, 600);
             }
         }
         else {
-            setTimeout(() => {
-                router.push(`http://${link}`);
-            }, 600);
         }
     }
-    else {
-    }
-    return (
+    set();
+    useEffect(()=>{
+        set()
+    },[])
+        return (
         <div className='w-full min-h-screen'>
             {data.status ?
                 <div className='m-3 text-xl text-stone-50'>
