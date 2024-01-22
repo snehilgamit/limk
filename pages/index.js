@@ -61,7 +61,7 @@ const Home = () => {
         const username = localStorage.getItem('user');
         if(username){
             const link = history[num].link.split("/").at(-1);
-            const deleteHistory = await axios.post('/api/remove',{username,link})
+            const deleteHistory = axios.post('/api/remove',{username,link});
         }
         historyObject.splice(num, 1);
         localStorage.setItem('history', JSON.stringify(historyObject));
