@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
     const [link, setlink] = useState('');
+    const [username,setUsername]=useState('')
     const [shorted, setshorted] = useState('');
     const [history, setHistory] = useState([]);
     const [text, setText] = useState('Short it!')
@@ -20,7 +21,7 @@ const Home = () => {
         setshorted('')
         setText('Shorting')
         if (link) {
-            const req = await axios.post('/api/createLink', { link });
+            const req = await axios.post('/api/createLink', { link,username });
             const shortedlink = "https://www.π.site/" + req.data.Shortlink;
             setshorted(shortedlink);
             setTimeout(() => {
@@ -54,11 +55,17 @@ const Home = () => {
         document.execCommand('copy');
         document.body.removeChild(el);
     }
-    const remove = (num) => {
+    const remove = async (num) => {
         const getHistory = localStorage.getItem('history');
         const historyObject = JSON.parse(getHistory);
+        const username = localStorage.getItem('user');
+        if(username){
+            const link = history[num].link.split("/").at(-1);
+            const deleteHistory = await axios.post('/api/remove',{username,link})
+        }
         historyObject.splice(num, 1);
         localStorage.setItem('history', JSON.stringify(historyObject));
+
         // let i = 0;
         // let lastNode = document.querySelectorAll('.history')[num];
         // const anniInterval = setInterval(()=>{
@@ -74,8 +81,31 @@ const Home = () => {
         // },2)
         sethistoryFun();
     }
+    const generateUsername = () => {
+        let str = 'qwertyuiopasdfghjklzxcvbnm';
+        let username = '';
+        let i = 0;
+        while(i<=10){
+            username += str[Math.floor(Math.random()*(str.length-1))];
+            i++;
+        }
+        console.log(username);
+        return username;
+    }
+    const setUser = () => {
+        const getUser = localStorage.getItem('user');
+        if(getUser){
+            setUsername(getUser);
+        }
+        else{
+            const username = generateUsername();
+            localStorage.setItem('user',username);
+
+        }
+    }
     useEffect(() => {
         sethistoryFun();
+        setUser();
     }, [])
     return (
         <>

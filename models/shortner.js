@@ -6,6 +6,9 @@ const shortnerSchema = new Schema({
     count: {
         type: Number,
         default: 0
+    },
+    username:{
+        type:String
     }
 }, {
     versionKey: false

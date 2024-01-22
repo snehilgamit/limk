@@ -5,29 +5,38 @@ import shortner from '@/models/shortner';
 const query = ({ data }) => {
     const [text, settext] = useState('Redirecting...');
     const router = useRouter();
-    useEffect(() => {
+    if (data.status) {
         const link = data.link;
         link.toLowerCase();
-        if(link.startsWith('https')||link.startsWith('http')){
-        if (link) {
-            setTimeout(()=>{
-                router.push(`${link}`);
-            },600);
+        if (link.startsWith('https') || link.startsWith('http')) {
+            if (link) {
+                setTimeout(() => {
+                    router.push(`${link}`);
+                }, 600);
+            }
+            else {
+                settext('Invalid link');
+            }
         }
-        else{
-            settext('Invalid link');
-        }}
-        else{
-            setTimeout(()=>{
+        else {
+            setTimeout(() => {
                 router.push(`http://${link}`);
-            },600);
+            }, 600);
         }
-    }, [])
+    }
+    else {
+    }
     return (
         <div className='w-full min-h-screen'>
-        <div className='m-3 text-xl text-stone-50'>
-            Link opened for {data.count+1} times,  {text}
-        </div>
+            {data.status ?
+                <div className='m-3 text-xl text-stone-50'>
+                    Link opened for {data.count + 1} times,  {text}
+                </div>
+                :
+                <div className='m-3 text-xl text-stone-50'>
+                    Invalid link
+                </div>
+            }
         </div>
     )
 }
@@ -35,14 +44,16 @@ export async function getServerSideProps(context) {
     const Shortlink = context.query.slug;
     await ConnectDB();
     const find = await shortner.findOne({ Shortlink });
-    await shortner.updateOne({Shortlink},{$inc:{count:1}});
+    await shortner.updateOne({ Shortlink }, { $inc: { count: 1 } });
     let link = '';
     if (find) {
         link = find.link;
+        const data = { link, count: find.count, status: true };
+        return {
+            props: { data }
+        }
     }
-    const data ={link,count:find.count}
-    return {
-        props: { data }
-    }
+    const data = {status:false}
+    return { props: { data } };
 }
 export default query

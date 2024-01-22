@@ -4,7 +4,7 @@ import shortner from "@/models/shortner";
 export default async function handler(req, res) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     await ConnectDB();
-        const { link } = req.body;
+        const { link ,username } = req.body;
         if (link.toString().trim().length !== 0) {
             function generateString(length) {
                 let result = '';
@@ -15,14 +15,14 @@ export default async function handler(req, res) {
 
                 return result;
             }
-            let Shortlink = generateString(8);
+            let Shortlink = generateString(6);
             let findDublicate = await shortner.find({ Shortlink });
 
             while (!findDublicate) {
-                Shortlink = generateString(8);
+                Shortlink = generateString(6);
                 findDublicate = await shortner.find({ Shortlink });
             }
-            const upload = await shortner.create({ link, Shortlink });
+            const upload = await shortner.create({ link, Shortlink,username });
             res.json({ Shortlink });
         }
         else {
