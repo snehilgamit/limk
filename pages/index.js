@@ -85,7 +85,7 @@ const Home = () => {
         let str = 'qwertyuiopasdfghjklzxcvbnm';
         let username = '';
         let i = 0;
-        while(i<=20){
+        while(i<=64){
             username += str[Math.floor(Math.random()*(str.length-1))];
             i++;
         }
