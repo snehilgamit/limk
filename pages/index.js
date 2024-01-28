@@ -89,7 +89,6 @@ const Home = () => {
             username += str[Math.floor(Math.random()*(str.length-1))];
             i++;
         }
-        console.log(username);
         return username;
     }
     const setUser = () => {
