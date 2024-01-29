@@ -99,6 +99,7 @@ const Home = () => {
         else{
             const username = generateUsername();
             localStorage.setItem('user',username);
+            setUsername(username);
 
         }
     }
