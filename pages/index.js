@@ -22,7 +22,7 @@ const Home = () => {
         setText('Shorting')
         if (link) {
             const req = await axios.post('/api/createLink', { link,username });
-            const shortedlink = "https://limk.vercel.app/" + req.data.Shortlink;
+            const shortedlink = "https://limk.site/" + req.data.Shortlink;
             setshorted(shortedlink);
             setTimeout(() => {
                 setText('Short it!')
