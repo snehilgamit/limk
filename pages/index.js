@@ -22,7 +22,7 @@ const Home = () => {
         setText('Shorting')
         if (link) {
             const req = await axios.post('/api/createLink', { link,username });
-            const shortedlink = "https://www.π.site/" + req.data.Shortlink;
+            const shortedlink = "https://limk.vercel.app/" + req.data.Shortlink;
             setshorted(shortedlink);
             setTimeout(() => {
                 setText('Short it!')
@@ -119,8 +119,8 @@ const Home = () => {
                         <div className="text-white cursor-pointer mt-3 font-semibold"><span className="text-red-600 text-xl font-extrabold">{'< '}</span>Click on any link it will be copied<span className="text-red-600 font-extrabold text-xl">{' />'}</span></div>}
                     <div  className="text-white mt-5 text-3xl w-[600px] text-center py-2 max-sm:w-full">
                         <h1 className="font-bold mb-5">History</h1>
-                        {history.map((el, index) => (
-                            <div key={index} className="history flex justify-around text-start text-sm h-5 my-3 cursor-pointer">
+                        {history.map((el,index) => (
+                            <div key={el} className="history flex justify-around text-start text-sm h-5 my-3 cursor-pointer">
                                 <div className="px-4 font-medium text-red-600 hover:opacity-60">{index + 1}</div>
                                 <div className="px-4 w-full active:text-red-600 truncate hover:opacity-60 active:opacity-100" onClick={() => { copy(el.link) }}>{el.link}</div>
                                 <div className="px-4  w-full truncate active:text-red-600 hover:opacity-60 active:opacity-100" onClick={() => { copy(el.enteredLink) }}>{el.enteredLink}</div>
