@@ -16,8 +16,8 @@ const Menubar = () => {
                 quality={100}
             />
             <div className="mr-6">
-                <Link href="/" className="text-center ml-3 mb-[3px] cursor-pointer">HOME</Link>
-                <Link href="https://github.com/snehilgamit" className="text-center ml-3 mb-[3px] cursor-pointer">GITHUB</Link>
+                <Link href="/" className="text-center ml-3 mb-[5px] cursor-pointer">HOME</Link>
+                <Link href="https://github.com/snehilgamit" className="text-center ml-3 mb-[5px] cursor-pointer">GITHUB</Link>
             </div>
         </menubar>
     )
