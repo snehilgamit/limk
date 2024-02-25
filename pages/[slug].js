@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import ConnectDB from '@/helper/mongoDB';
 import shortner from '@/models/shortner';
 import ip from 'ip'
-import { headers } from '@/next.config';
 const query = ({ data }) => {
     const [text, settext] = useState('Redirecting...');
     const router = useRouter();
