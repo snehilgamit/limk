@@ -7,22 +7,17 @@ Simple link shortner by annie. for basic next.js(react), mongoDB.js project.
 
 ```bash
     git clone https://github.com/snehilgamit/linkshortner.git
+
     cd linkshortner
-```
 
-```bash
     npm install
-```
 
-```bash
     touch .env.local
-# add in .env.local MongoURI = your mongoDb database uri
-```
 
-```bash
+    # add in .env.local MongoURI = your mongoDb database uri
+
     npm run dev
 ```
-
 # Screenshot
 
 ![Screenshot (1)](https://limk.site/screenshot01.png)
