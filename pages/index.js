@@ -103,15 +103,15 @@ const Home = () => {
                         <div className="text-white cursor-pointer mt-3 font-semibold" onClick={() => { copy(shorted) }}><span className="text-red-600 text-xl font-extrabold">{'< '}</span>
                             <span className="shortedLink active:opacity-60" >{shorted}</span>
                             <span className="text-red-600 font-extrabold text-xl">{' />'}</span> </div> :
-                        <div className="text-white cursor-pointer mt-3 font-semibold"><span className="text-red-600 text-xl font-extrabold">{'< '}</span>Click on any link it will be copied<span className="text-red-600 font-extrabold text-xl">{' />'}</span></div>}
+                        <div className="text-white cursor-pointer mt-3 font-semibold text-center"><span className="text-red-600 text-xl font-extrabold">{'< '}</span>Click on any link it will be copied<span className="text-red-600 font-extrabold text-xl">{' />'}</span></div>}
                     <div className="text-white mt-5 text-3xl w-[600px] text-center py-2 max-sm:w-full">
                         <h1 className="font-bold mb-5">History</h1>
                         {history.map((el, index) => (
-                            <div key={el} className="history flex justify-around text-start text-sm h-5 my-3 cursor-pointer">
+                            <div key={el} className="history flex justify-around text-start text-sm max-sm:text-xs h-5 my-3 cursor-pointer">
                                 <div className="px-4 font-medium text-red-600 hover:opacity-60">{index + 1}</div>
                                 <div className="px-4 w-full active:text-red-600 truncate hover:opacity-60 active:opacity-100" onClick={() => { copy(el.link) }}>{el.link}</div>
                                 <div className="px-4  w-full truncate active:text-red-600 hover:opacity-60 active:opacity-100" onClick={() => { copy(el.enteredLink) }}>{el.enteredLink}</div>
-                                <div className="removeBtn bg-white hover:opacity-60 px-4 text-center  mx-4 text-black rounded-xl" onClick={() => remove(index)}>remove</div>
+                                <div className="removeBtn bg-white hover:opacity-60 px-4 max-sm:px-2 text-center  mx-4 text-black rounded-xl" onClick={() => remove(index)}>remove</div>
                             </div>
                         ))}
                     </div>
