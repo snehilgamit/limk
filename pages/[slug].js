@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import ConnectDB from '@/helper/mongoDB';
 import shortner from '@/models/shortner';
-import ip from 'ip'
 const query = ({ data }) => {
     const [text, settext] = useState('Redirecting...');
     const router = useRouter();
@@ -52,8 +51,7 @@ export async function getServerSideProps(context) {
     const Shortlink = context.query.slug;
     await ConnectDB();
     const find = await shortner.findOne({ Shortlink });
-    const ipAddress = ip.address();
-    await shortner.updateOne({ Shortlink }, { $inc: { count: 1 },$push:{openedBy:{ipAddress,headers:context.req.headers}} });
+    await shortner.updateOne({ Shortlink }, { $inc: { count: 1 },$push:{openedBy:context.req.headers} });
     let link = '';
     if (find) {
         link = find.link;
