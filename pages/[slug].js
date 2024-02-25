@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import ConnectDB from '@/helper/mongoDB';
 import shortner from '@/models/shortner';
+import ip from 'ip'
+import { headers } from '@/next.config';
 const query = ({ data }) => {
     const [text, settext] = useState('Redirecting...');
     const router = useRouter();
-    const set = () =>{
 
+    const set = () =>{
         if (data.status) {
             const link = data.link;
             link.toLowerCase();
@@ -29,9 +31,9 @@ const query = ({ data }) => {
         else {
         }
     }
-    set();
     useEffect(()=>{
         set()
+        return set()
     },[])
         return (
         <div className='w-full min-h-screen'>
@@ -51,7 +53,8 @@ export async function getServerSideProps(context) {
     const Shortlink = context.query.slug;
     await ConnectDB();
     const find = await shortner.findOne({ Shortlink });
-    await shortner.updateOne({ Shortlink }, { $inc: { count: 1 } });
+    const ipAddress = ip.address();
+    await shortner.updateOne({ Shortlink }, { $inc: { count: 1 },$push:{openedBy:{ipAddress,headers:context.req.headers}} });
     let link = '';
     if (find) {
         link = find.link;

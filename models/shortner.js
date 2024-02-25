@@ -9,6 +9,10 @@ const shortnerSchema = new Schema({
     },
     username:{
         type:String
+    },
+    openedBy:{
+        type:Array,
+        default:[]
     }
 }, {
     versionKey: false

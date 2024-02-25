@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const Menubar = () => {
     return (
-        <menubar className="absolute top-5 w-[400px] max-sm:w-[280px] py-1 max-sm:py-1.5 bg-white rounded-3xl flex items-center justify-between text-base font-bold shadow-slate-400 shadow-lg">
+        <menubar className="absolute top-5 w-[400px] max-sm:w-[280px] py-1 max-sm:py-1.5 bg-white rounded-3xl flex items-center justify-between text-base font-bold shadow-slate-400 shadow-lg hover:scale-[1.03] transition-all duration-700 ease-in-out">
             <Image
                 className="ml-4 max-sm:mx-2 h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer"
                 src="/logo.png"
