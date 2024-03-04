@@ -1,0 +1,461 @@
+# 1 
+class stack:
+    def __init__(self):
+        self.max = 100;
+        self.array = [];
+        self.top =-1;
+    
+    def isEmpty(self):
+        if self.top ==-1:
+            return True;
+        return False;
+    
+    def isFull(self):
+        if self.top==self.max:
+            return True;
+        return False;
+    
+    def Push(self,data):
+        if(self.isFull()):
+            print("Stack is overflow");
+            return 0;
+        self.top= self.top+1
+        self.array.append(data)
+        print(f"Elmenent {data} pushed in stack");
+        print(f"New Stack is {self.array}")
+
+    def Pop(self):
+        if(self.isEmpty()):
+            print("Stack is UnderFlow");
+            return 0;
+        el = self.array[self.top];
+        self.top = self.top-1;
+        self.array.pop();
+        print(f"Element {el} is popped from stack");
+        print(f"New Stack is {self.array}")
+    def Minimum(self):
+        self.min = self.array[0];
+        for i in self.array:
+            if i<self.min:
+                self.min = i;
+        print(f"Minimum Element is : {self.min}");
+    def Peek(self):
+        if(self.isEmpty()):
+            print("Stack underflow")
+            return 0
+        print(f"Element at top is {self.array[self.top]}")
+
+Stack = stack()
+print(Stack.isEmpty())
+Stack.Push(20)
+Stack.Push(40)
+Stack.Pop()
+Stack.Push(30)
+Stack.Push(40)
+Stack.Push(70)
+Stack.Push(2)
+Stack.Pop()
+Stack.Push(80)
+
+Stack.Minimum()
+Stack.Peek()
+
+
+# 2
+
+output = []
+operator = []
+priority = {'(': 0, ')': 0, '+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
+
+exp = input("Enter the infix expression: ")
+
+for ch in exp:
+    if ch == '(':
+        operator.append(ch)
+    elif ch == ')':
+        while operator[-1] != '(':
+            ele = operator.pop()
+            output.append(ele)
+        operator.pop()
+    elif ch in ('+', '-', '*', '/', '^'):
+        if len(operator) > 0:
+            while priority.get(operator[-1], 0) >= priority[ch]:
+                ele = operator.pop()
+                output.append(ele)
+                if len(operator) == 0:
+                    break
+            operator.append(ch)
+        else:
+            operator.append(ch)
+
+while len(operator) != 0:
+    ele = operator.pop()
+    output.append(ele)
+
+print("Infix expression: ", exp)
+print("Postfix expression: ", end="")
+for ele in output:
+    print(ele, end=" ")
+    
+#3 
+a = [7,8,6,3,1,6,5,2,3,9]
+for i in range(len(a)):
+    next = -1
+    flag = 0
+    for j in range(i,len(a)):
+        if (a[j]>a[i]):
+            next =a[j]
+            print(a[i],"->",a[j])
+            flag = 1
+            break;
+    if(flag==0):
+        print(a[i],"-> No greater")
+
+#5 and 6
+class CQueue:
+    def __init__(self,s):
+        self.array = [None]*s
+        self.size = 0
+        self.capacity = s
+        self.front = self.rear = -1
+
+    def isEmpty(self):
+        if self.size==0:
+            return True
+        return False
+    
+    def isFull(self):
+        if(self.size == self.capacity):
+            return True
+        return False
+    
+    def enQueue(self,data):
+        if(self.isFull()):
+            print("Queue is overflow")
+            return 0
+        elif(self.isEmpty()):
+            self.rear =self.front = 0
+            self.array[self.rear]=data
+            print("element inserted in Queue",data)
+            self.size=self.size+1
+            return 1
+        self.rear = (self.rear+1)%self.capacity
+        self.array[self.rear]=data
+        self.size = self.size+1
+        print("element inserted in Queue",data)
+
+    def deQueue(self):
+        if(self.isEmpty()):
+            return print("Queue is underflow")
+        ele = self.array[self.front]
+        if self.front == self.rear:
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front+1)%self.capacity;
+        print("Deleted element is",ele)
+        self.size =self.size-1
+    def frontEl(self):
+        return print("Front Element is",self.array[self.front]);
+    def rearEl(self):
+        return print("Rear element is",self.array[self.rear]);
+cQ = CQueue(10)
+cQ.enQueue(20)
+cQ.deQueue()
+print(cQ.array)
+cQ.frontEl()
+cQ.rearEl()
+
+##7 merge two linked lists (sorted)
+class newNode():
+    def __init__(self,data):
+        self.data = data;
+        self.next =None;
+l1 = newNode(1)
+l2 = newNode(3)
+l3 = newNode(5)
+l4 = newNode(7)
+
+l1.next = l2
+l2.next = l3
+l3.next = l4
+
+li1 = newNode(2)
+li2 = newNode(4)
+li3 = newNode(6)
+li4 = newNode(8)
+
+li1.next = li2
+li2.next = li3
+li3.next = li4
+
+head1 = l1
+head2 = li1
+
+while(head1 is not None and head2 is not None):
+    if(head1.data>head2.data):
+        print(head2.data,end=" ");
+        head2 =head2.next;
+    else:
+        print(head1.data,end=" ");
+        head1 =head1.next;
+while head1 is not None:
+    print(head1.data, end=" ")
+    head1 = head1.next
+while head2 is not None:
+    print(head2.data, end=" ")
+    head2 = head2.next
+print()
+
+
+# 8 merge point 
+class newNode():
+    def __init__ (self,data):
+        self.data = data
+        self.next = None
+def findLength(head):
+    length = 0
+    while (head is not None):
+        head = head.next
+        length +=1
+    return length
+def margePoint(head1,head2):
+    len1 = findLength(head1)
+    len2 = findLength(head2)
+    while(len1>len2):
+        head1 =head1.next
+        len1 -=1
+    while(len2>len1):
+        head2 = head2.next
+        len2 -=1
+    while(head1 and head2 and head1 != head2):
+        head1 = head1.next
+        head2 =head2.next
+        if(head1 and head2 and head2 == head1):
+            return print("Merge point is",head2.data)
+    return print("No mergePoint")
+l1 = newNode(1)
+l2 = newNode(2)
+l3 = newNode(3)
+l4 = newNode(4)
+
+a1 = newNode(5)
+a2 = newNode(6)
+a3 = newNode(7)
+a4 = newNode(8)
+
+# Construct the linked lists
+l1.next = l2
+l2.next = l3
+l3.next = l4
+
+a1.next = a2
+a2.next = a3
+a3.next = a4
+a4.next = l4 # No merge point
+margePoint(l1,a1)
+
+# 9th
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+def swapNodes(head):
+    if not head or not head.next:
+        return head
+    current = head;
+    while current and current.next:
+        current.data, current.next.data = current.next.data ,current.data
+        current = current.next.next
+    return head
+a = Node(10)
+a.next = Node(20)
+a.next.next = Node(30)
+a.next.next.next = Node(50)
+swapNodes(a)
+
+#10 
+class Node:
+    def __init__ (self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+def inOrder(root):
+    if root:
+        inOrder(root.left);
+        print(root.data,end="->")
+        inOrder(root.right);
+def preOrder(root):
+    if root:
+        print(root.data,end="->")
+        preOrder(root.left)
+        preOrder(root.right)
+def postOrder(root):
+    if root:
+        postOrder(root.left)
+        postOrder(root.right)
+        print(root.data,end="->")
+root=Node(3)
+root.left=Node(4)
+root.right=Node(5)
+root.left.left=Node(6)
+root.left.right=Node(8)
+root.right.left=Node(7)
+root.right.right=Node(9)
+inOrder(root)
+print()
+preOrder(root)
+print()
+postOrder(root)
+print("")
+
+#11
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right =None
+def isMirrored(a,b):
+    if a is None and b is None:
+        return True
+    if a is None or b is None:
+        return False
+    return (a.data == b.data and isMirrored(a.left,b.right) and isMirrored(a.right,b.left))
+root1=Node(2)
+root2=Node(2)
+root1.left=Node(8)
+root1.right=Node(5)
+root2.left=Node(8)
+root2.right=Node(5)
+if isMirrored(root1,root2):
+    print("Mirrored")
+else:
+    print("Not Mirrored")
+    
+#12
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+def maxDepth(root):
+    if root is None:
+        return 0
+    ldepth = maxDepth(root.left)
+    rdepth = maxDepth(root.right)
+    if(ldepth>rdepth):
+        return ldepth+1
+    return rdepth+1
+
+root=Node(6)
+root.left=Node(3)
+root.right=Node(2)
+root.left.left=Node(1)
+root.right.right=Node(8)
+root.left.left.left=Node(9)
+root.left.left.right=Node(7)
+print("Height is:", maxDepth(root))
+
+#13
+# Comman ancestor
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+def lca(root,a,b):
+    if root is None:
+        return 0
+    if root.data ==a or root.data ==b:
+        return root
+    else:
+        llca = lca(root.left,a,b);
+        rlca = lca(root.right,a,b);
+        if(llca and rlca):
+            return root
+        return llca if llca else rlca
+root=Node(1)
+root.left=Node(2)
+root.right=Node(3)
+root.left.left=Node(4)
+root.left.right=Node(5)
+root.right.left=Node(6)
+root.right.right=Node(6)
+a=4
+b=5
+l=lca(root,a,b)
+print("Lowest Common Ancestor for",a, "and",b, "is:",l.data)
+
+#14
+class Tree:
+    def __init__(self,data):
+        self.data =data
+        self.left =None
+        self.right =None
+def isValidBST(root,left,right):
+    if(root is None):
+        return True
+    if(left is not None and root.data<=left.data):
+        return False
+    elif(right is not None and root.data>=right.data):
+        return False
+    return isValidBST(root.left,left,root) and isValidBST(root.right,root,right )
+
+tree = Tree(10)
+tree.left = Tree(5)
+tree.right = Tree(19)
+
+print(isValidBST(tree,None,None));
+
+
+
+#15
+class Tree:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right =None
+def isValidBST(root,left,right):
+    if(root is not None):
+        return True
+    if(left is not None and root.data<=left.data):
+        return False
+    if(right is not None and root.data>=right.data):
+        return False
+    return isValidBST(root.left,left,root) and isValidBST(root.right,root,right);
+
+root = Tree(10)
+root.left = Tree(5)
+root.right = Tree(19)
+print(isValidBST(root,root.left,root.right));
+
+
+#16
+class Tree:
+    def __init__(self,data):
+        self.data =data
+        self.left =None
+        self.right =None
+
+def LevelOrder(root):
+    if root is None:
+        return 0
+    a=[]
+    a.append(root)
+    while (len(a)>0):
+        print(a[0].data,end="->")
+        Node=a.pop(0)
+        if Node.left is not None:
+            a.append(Node.left)
+        if Node.right is not None:
+            a.append(Node.right)
+    print()
+root = Tree(1)
+root.left = Tree(2)
+root.right = Tree(3)
+root.left.left = Tree(4)
+root.left.right = Tree(5)
+root.right.left = Tree(6)
+root.right.right = Tree(7)
+
+LevelOrder(root)
