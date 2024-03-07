@@ -1,6 +1,6 @@
 # About
 
-Simple link shortner by annie. for basic next.js(react), mongoDB.js project.
+This simple link shortener project allows users to create shortened links, tracks usage statistics such as IP address and location, and stores this information in a MongoDB database for future analysis
 - [Link](https://limk.site)
 
 # Get Started
