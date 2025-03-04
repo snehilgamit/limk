@@ -6,9 +6,9 @@ This simple link shortener project allows users to create shortened links, track
 # Get Started
 
 ```bash
-    git clone https://github.com/snehilgamit/linkshortner.git
+    git clone https://github.com/snehilgamit/limk.git
 
-    cd linkshortner
+    cd limk
 
     npm install
 
